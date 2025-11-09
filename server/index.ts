@@ -70,7 +70,7 @@ app.use((req, res, next) => {
   // Start HTTP server
   const port = 5000;
   server.listen(
-    { port, host: "0.0.0.0", reusePort: true },
+    { port},
     () => log(`serving on port ${port}`)
   );
 })();

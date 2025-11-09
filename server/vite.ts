@@ -58,10 +58,10 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const dist = path.resolve(__dirname, "public");
+  const dist = path.resolve(__dirname, "..", "dist", "public");
   if (!fs.existsSync(dist)) {
     throw new Error(`Missing build directory: ${dist}`);
   }
   app.use(express.static(dist));
-  app.use("*", (_req, res) => res.sendFile(path.resolve(dist, "index.html")));
+  app.use("*", (_req, res) => res.sendFile(path.resolve("..",dist, "index.html")));
 }

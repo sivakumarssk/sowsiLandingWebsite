@@ -1,12 +1,17 @@
 // src/controllers/contactController.ts
 import { Request, Response, NextFunction } from "express";
 import { ContactModel } from "@shared/schema";
+import { sendMail } from "server/uitils/mailer";
 
 // POST /api/contact
 export async function createContact(req: Request, res: Response, next: NextFunction) {
   try {
     const contact = new ContactModel(req.body);
     const saved = await contact.save();
+    await sendMail(
+      "New Contact Form Submission",
+      `You received a new contact:\n\n${JSON.stringify(saved, null, 2)}`
+    );
     res.status(201).json({ success: true, data: saved });
   } catch (err: any) {
     if (err.name === 'ValidationError') {

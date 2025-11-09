@@ -1,12 +1,19 @@
 // src/controllers/consultationController.ts
 import { Request, Response, NextFunction } from "express";
 import { ConsultationModel } from "@shared/schema";
+import { sendMail } from "server/uitils/mailer";
 
 // POST /api/consultation
 export async function createConsultation(req: Request, res: Response, next: NextFunction) {
   try {
     const cons = new ConsultationModel(req.body);
     const saved = await cons.save();
+    
+      await sendMail(
+      "New Consultation Request",
+      `You received a new consultation:\n\n${JSON.stringify(saved, null, 2)}`
+    );
+    
     res.status(201).json({ success: true, data: saved });
   } catch (err: any) {
     if (err.name === 'ValidationError') {
