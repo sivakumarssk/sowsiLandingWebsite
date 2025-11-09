@@ -79,6 +79,58 @@ const About = () => {
       
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:flex lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-bold text-[#1E293B]">Product Innovation Pipeline</h2>
+              <p className="mt-4 text-lg text-gray-600">
+                Beyond client engagements, we are investing in proprietary products that extend Sowsi&apos;s impact. Each product is built alongside design partners to ensure it solves real operational pains from day one.
+              </p>
+            </div>
+            <div className="mt-8 lg:mt-0">
+              <Link href="/products">
+                <Button variant="outline">Explore Products</Button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
+            <div className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-8 shadow-sm">
+              <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                Beta · Coming Soon
+              </span>
+              <h3 className="mt-4 text-xl font-semibold text-[#1E293B]">Invoice &amp; Inventory Suite</h3>
+              <p className="mt-3 text-base text-gray-600">
+                A modular engine that joins invoicing, inventory, procurement, and analytics for fast-scaling SMEs. Design partners are shaping automations, dashboards, and integrations before general availability.
+              </p>
+              <div className="mt-6">
+                <Link href="/products/invoice-inventory-suite">
+                  <Button size="sm">Join Early Access Waitlist</Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-8 shadow-sm">
+              <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                Concept · Coming Soon
+              </span>
+              <h3 className="mt-4 text-xl font-semibold text-[#1E293B]">Sowsi Meet</h3>
+              <p className="mt-3 text-base text-gray-600">
+                Our upcoming collaboration suite blends AI-generated notes, task automation, and secure recordings to keep hybrid teams aligned. We are co-creating the experience with forward-looking product teams.
+              </p>
+              <div className="mt-6">
+                <Link href="/products/sowsi-meet">
+                  <Button size="sm" variant="outline">
+                    Preview the Roadmap
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-[#1E293B]">Our Values</h2>
             <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">

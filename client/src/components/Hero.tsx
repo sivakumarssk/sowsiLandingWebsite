@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ChevronRight, Clock, ShieldCheck, Sparkles } from "lucide-react";
 import StatsCounter from "./StatsCounter";
 import { useEffect, useState } from "react";
 
@@ -10,6 +11,24 @@ const animationImages = [
   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=800&h=450",
   "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=800&h=450",
   "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=800&h=450"
+];
+
+const heroHighlights = [
+  {
+    title: "Experience-led products",
+    description: "Strategy, design, and engineering pods launch measurable outcomes in weeks.",
+    icon: Sparkles
+  },
+  {
+    title: "Secure & scalable",
+    description: "Cloud, compliance, and observability built-in from sprint one.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Faster delivery loops",
+    description: "Automation and DevOps accelerate releases without sacrificing quality.",
+    icon: Clock
+  }
 ];
 
 const Hero = () => {
@@ -28,16 +47,22 @@ const Hero = () => {
 
   return (
     <section className="relative bg-[#F8FAFC]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white via-white/60 to-transparent pointer-events-none" aria-hidden="true" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-6 sm:text-center md:max-w-2xl md:mx-auto lg:text-left">
+            <Badge variant="secondary" className="inline-flex items-center justify-center rounded-full bg-primary/10 text-primary px-4 py-1 text-sm font-semibold">
+              New products: Invoice Suite & Sowsi Meet (coming soon)
+            </Badge>
             <h1 className="text-4xl tracking-tight font-extrabold text-[#1E293B] sm:text-5xl md:text-6xl animate-fade-in">
               <span className="block">Your Vision.</span>
               <span className="block text-primary mt-1">Our Technology.</span>
             </h1>
             <p className="mt-5 text-lg text-gray-500 animate-slide-up">
-              Sowsi Technologies specializes in creating cutting-edge digital solutions, from web applications and 
-              mobile apps to IoT solutions and AI-powered systems.
+              Sowsi Technologies specializes in crafting experience-led platforms across web, mobile, IoT, and AI—supported by automation, analytics, and future-ready commerce solutions.
+            </p>
+            <p className="mt-4 text-base text-gray-500">
+              We are extending our toolkit with a modular invoice and inventory engine designed for ambitious SMEs. Talk to us about joining the early access cohort.
             </p>
             <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
               <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
@@ -56,21 +81,25 @@ const Hero = () => {
             </div>
           </div>
           <div className="mt-12 lg:mt-0 lg:col-span-6 relative">
-            <div className="aspect-w-16 aspect-h-9 rounded-lg shadow-xl overflow-hidden">
-              {animationImages.map((src, index) => (
-                <img 
-                  key={index}
-                  src={src} 
-                  alt={`Sowsi Technologies - Slide ${index + 1}`} 
-                  className={`w-full h-full rounded-lg object-cover absolute transition-opacity duration-1000 ${
-                    index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-              ))}
+            <div className="rounded-[28px] border border-white/60 bg-gradient-to-br from-white via-white to-slate-100/50 p-4 shadow-xl">
+              <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-2xl">
+                {animationImages.map((src, index) => (
+                  <img 
+                    key={index}
+                    src={src} 
+                    alt={`Sowsi Technologies - Slide ${index + 1}`} 
+                    className={`w-full h-[300px] rounded-xl object-cover absolute inset-0 transition-opacity duration-1000 ${
+                      index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      
       
       {/* Floating stats section */}
       {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 absolute z-10" style={{ marginBottom: "-5rem" }}>

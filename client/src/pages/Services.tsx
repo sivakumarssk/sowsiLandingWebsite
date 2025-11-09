@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async";
 import ServiceCard from "@/components/ServiceCard";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight } from "lucide-react";
 
 const services = [
   {
@@ -72,6 +74,16 @@ const services = [
   }
 ];
 
+const serviceCategories = [
+  { href: "/services/web-development", label: "Web Development" },
+  { href: "/services/mobile-development", label: "Mobile Development" },
+  { href: "/services/iot-solutions", label: "IoT Solutions" },
+  { href: "/services/ai-data", label: "AI & Data" },
+  { href: "/services/cloud-devops", label: "Cloud & DevOps" },
+  { href: "/services/consulting-strategy", label: "Consulting & Strategy" },
+  { href: "/services/invoice-inventory-suite", label: "Invoice & Inventory Suite", badge: "Beta" }
+];
+
 const Services = () => {
   return (
     <>
@@ -90,6 +102,36 @@ const Services = () => {
               We offer a comprehensive range of technology services designed to help businesses innovate and grow in the digital era.
             </p>
           </div>
+
+          <div className="mt-12 bg-white/70 backdrop-blur border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-xl">
+                <h2 className="text-2xl font-bold text-[#1E293B]">Explore service practices</h2>
+                <p className="mt-2 text-base text-gray-600">
+                  Dive into each capability to view detailed deliverables, technology stacks, and engagement models tailored to your goals.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-full lg:w-auto">
+                {serviceCategories.map((category) => (
+                  <Link
+                    key={category.href}
+                    href={category.href}
+                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 py-3 text-sm font-semibold text-[#1E293B] transition hover:border-primary/50 hover:bg-white hover:text-primary"
+                  >
+                    <span className="flex items-center gap-2">
+                      {category.label}
+                      {category.badge && (
+                        <Badge variant="secondary" className="text-xs font-medium">
+                          {category.badge}
+                        </Badge>
+                      )}
+                    </span>
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       
@@ -105,7 +147,7 @@ const Services = () => {
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold text-[#1E293B]">Ready to Start Your Project?</h2>
               <p className="mt-4 text-lg text-gray-500">
-                Our team of experts is ready to help you turn your vision into reality. Contact us today to discuss your project.
+                Our team of experts is ready to help you turn your vision into reality—whether that's a custom build, an automation initiative, or early access to our invoice & inventory suite.
               </p>
               <div className="mt-8">
                 <Link href="/contact">

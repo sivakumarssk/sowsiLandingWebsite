@@ -71,6 +71,54 @@ const Portfolio = () => {
             ))}
           </div>
           
+          <div className="mt-24 rounded-3xl bg-[#0B1220] px-6 py-12 sm:px-12">
+            <div className="grid gap-10 lg:grid-cols-2">
+              <div>
+                <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                  Coming Soon
+                </span>
+                <h2 className="mt-4 text-3xl font-bold text-white">Next up in the Sowsi product lab</h2>
+                <p className="mt-4 text-base text-slate-300">
+                  Alongside bespoke builds, our team is productizing the playbooks that keep clients growing. Preview the upcoming releases and partner with us before launch.
+                </p>
+              </div>
+              <div className="grid gap-6">
+                <div className="rounded-2xl border border-slate-700 bg-[#111C34] p-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-semibold text-white">Invoice &amp; Inventory Suite</h3>
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">Beta</span>
+                  </div>
+                  <p className="mt-3 text-sm text-slate-300">
+                    Automate finance-to-fulfillment workflows with a modular platform shaped by our commerce and operations projects.
+                  </p>
+                  <div className="mt-4">
+                    <Link href="/products/invoice-inventory-suite">
+                      <Button size="sm" variant="outline" className="border-primary/40 text-primary hover:bg-white/10">
+                        Join Early Access
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-slate-700 bg-[#111C34] p-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-semibold text-white">Sowsi Meet</h3>
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/80">In Design</span>
+                  </div>
+                  <p className="mt-3 text-sm text-slate-300">
+                    A collaborative workspace with AI-powered notes, automated handoffs, and secure recordings tailored to product and delivery teams.
+                  </p>
+                  <div className="mt-4">
+                    <Link href="/products/sowsi-meet">
+                      <Button size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                        Preview Features
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div className="mt-20 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold text-[#1E293B]">Let's Create Your Success Story</h2>
