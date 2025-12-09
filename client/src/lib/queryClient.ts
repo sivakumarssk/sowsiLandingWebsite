@@ -11,15 +11,42 @@ export async function apiRequest(
   method: string,
   url: string,
   data?: unknown | undefined,
-): Promise<Response> {
+  isFormData?: boolean,
+  includeAuth?: boolean,
+): Promise<any> {
+  const headers: HeadersInit = {};
+  let body: BodyInit | undefined;
+
+  if (includeAuth) {
+    const token = localStorage.getItem("adminToken");
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+  }
+
+  if (data) {
+    if (isFormData && data instanceof FormData) {
+      body = data;
+      // Don't set Content-Type for FormData, browser will set it with boundary
+    } else {
+      headers["Content-Type"] = "application/json";
+      body = JSON.stringify(data);
+    }
+  }
+
   const res = await fetch(url, {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
+    headers,
+    body,
     credentials: "include",
   });
 
   await throwIfResNotOk(res);
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.includes("application/json")) {
+    const json = await res.json();
+    return json.data || json;
+  }
   return res;
 }
 

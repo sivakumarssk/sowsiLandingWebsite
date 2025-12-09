@@ -1,5 +1,6 @@
 // src/index.ts
 import express, { type Request, Response, NextFunction } from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
@@ -8,6 +9,48 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+
+// CORS configuration
+const corsOptions = {
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    // In development, allow all origins (for easier local development)
+    if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
+      return callback(null, true);
+    }
+    
+    // Allow requests with no origin (like mobile apps, Postman, or same-origin requests)
+    if (!origin) {
+      return callback(null, true);
+    }
+    
+    // List of allowed origins for production
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:5173',
+      'http://localhost:5000',
+      process.env.ADMIN_URL,
+      process.env.CLIENT_URL,
+    ].filter(Boolean) as string[];
+    
+    // Allow if origin is in the allowed list or contains localhost/127.0.0.1
+    if (allowedOrigins.includes(origin) || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Length', 'Content-Type'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
 // Body parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -23,6 +23,8 @@ import ConsultingStrategy from "@/pages/services/ConsultingStrategy";
 import InvoiceInventorySuite from "@/pages/services/InvoiceInventorySuite";
 import InvoiceInventoryProduct from "@/pages/products/InvoiceInventorySuite";
 import SowsiMeet from "@/pages/products/SowsiMeet";
+import Careers from "@/pages/Careers";
+import JobApplication from "@/pages/JobApplication";
 
 function Router() {
   return (
@@ -42,6 +44,8 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/contact" component={Contact} />
+      <Route path="/careers" component={Careers} />
+      <Route path="/careers/apply/:jobId" component={JobApplication} />
       <Route component={NotFound} />
     </Switch>
   );

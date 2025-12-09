@@ -82,3 +82,90 @@ const SubscriptionSchema: Schema<ISubscription> = new Schema(
 );
 
 export const SubscriptionModel: Model<ISubscription> = mongoose.model<ISubscription>("Subscription", SubscriptionSchema);
+
+// 5. Admin User
+export interface IAdmin extends Document {
+  username: string;
+  password: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const AdminSchema: Schema<IAdmin> = new Schema(
+  {
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+  },
+  { timestamps: true }
+);
+
+export const AdminModel: Model<IAdmin> = mongoose.model<IAdmin>("Admin", AdminSchema);
+
+// 6. Job Posting
+export interface IJob extends Document {
+  uniqueCode: string;
+  title: string;
+  department: string;
+  location: string;
+  type: string; // Full-time, Part-time, Contract, etc.
+  description: string;
+  requirements: string[];
+  responsibilities: string[];
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const JobSchema: Schema<IJob> = new Schema(
+  {
+    uniqueCode: { type: String, required: true, unique: true },
+    title: { type: String, required: true },
+    department: { type: String, required: true },
+    location: { type: String, required: true },
+    type: { type: String, required: true },
+    description: { type: String, required: true },
+    requirements: [{ type: String }],
+    responsibilities: [{ type: String }],
+    isActive: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+);
+
+export const JobModel: Model<IJob> = mongoose.model<IJob>("Job", JobSchema);
+
+// 7. Job Application
+export interface IJobApplication extends Document {
+  jobId: mongoose.Types.ObjectId;
+  jobCode: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  resumePath: string;
+  coverLetter?: string;
+  experience?: string;
+  education?: string;
+  skills?: string[];
+  createdAt: Date;
+}
+
+const JobApplicationSchema: Schema<IJobApplication> = new Schema(
+  {
+    jobId: { type: Schema.Types.ObjectId, ref: "Job", required: true },
+    jobCode: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String, required: true },
+    resumePath: { type: String, required: true },
+    coverLetter: { type: String },
+    experience: { type: String },
+    education: { type: String },
+    skills: [{ type: String }],
+  },
+  { timestamps: { createdAt: true, updatedAt: false } }
+);
+
+export const JobApplicationModel: Model<IJobApplication> = mongoose.model<IJobApplication>("JobApplication", JobApplicationSchema);
