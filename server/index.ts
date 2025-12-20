@@ -29,15 +29,34 @@ const corsOptions = {
       'http://localhost:3001',
       'http://localhost:5173',
       'http://localhost:5000',
+      // Production domains (both www and non-www, http and https)
+      'https://www.sowsitechnologies.com',
+      'https://sowsitechnologies.com',
+      'http://www.sowsitechnologies.com',
+      'http://sowsitechnologies.com',
       process.env.ADMIN_URL,
       process.env.CLIENT_URL,
     ].filter(Boolean) as string[];
     
+    // Normalize origin (remove trailing slash if present)
+    const normalizedOrigin = origin.endsWith('/') ? origin.slice(0, -1) : origin;
+    
+    // Check if origin matches any allowed origin (exact match or starts with)
+    const isAllowed = allowedOrigins.some(allowed => {
+      const normalizedAllowed = allowed.endsWith('/') ? allowed.slice(0, -1) : allowed;
+      return normalizedOrigin === normalizedAllowed || normalizedOrigin.startsWith(normalizedAllowed);
+    });
+    
+    // Debug logging
+    console.log('CORS check - Origin:', origin);
+    console.log('CORS check - Normalized:', normalizedOrigin);
+    console.log('CORS check - Is allowed:', isAllowed);
+    
     // Allow if origin is in the allowed list or contains localhost/127.0.0.1
-    if (allowedOrigins.includes(origin) || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+    if (isAllowed || normalizedOrigin.includes('localhost') || normalizedOrigin.includes('127.0.0.1')) {
       callback(null, true);
     } else {
-      console.warn(`CORS blocked origin: ${origin}`);
+      console.warn(`CORS blocked origin: ${origin} (normalized: ${normalizedOrigin})`);
       callback(new Error('Not allowed by CORS'));
     }
   },

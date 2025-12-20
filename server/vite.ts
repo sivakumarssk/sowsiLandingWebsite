@@ -39,7 +39,12 @@ export async function setupVite(app: Express, server: Server) {
 
   // Dev middleware
   app.use(vite.middlewares);
-  app.use("*", async (req, res, next) => {
+  // Only serve index.html for non-API routes (SPA fallback)
+  app.use(async (req, res, next) => {
+    // Skip API routes - they should have been handled already
+    if (req.path.startsWith("/api")) {
+      return next();
+    }
     try {
       const url = req.originalUrl;
       const indexHtml = path.resolve(__dirname, "..", "client", "index.html");
@@ -63,5 +68,13 @@ export function serveStatic(app: Express) {
     throw new Error(`Missing build directory: ${dist}`);
   }
   app.use(express.static(dist));
-  app.use("*", (_req, res) => res.sendFile(path.resolve("..",dist, "index.html")));
+  // Only serve index.html for non-API routes (SPA fallback)
+  app.use((req, res, next) => {
+    // Skip API routes - they should have been handled already
+    if (req.path.startsWith("/api")) {
+      return next();
+    }
+    // For all other routes, serve the SPA index.html
+    res.sendFile(path.resolve(dist, "index.html"));
+  });
 }

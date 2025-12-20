@@ -25,6 +25,7 @@ import InvoiceInventoryProduct from "@/pages/products/InvoiceInventorySuite";
 import SowsiMeet from "@/pages/products/SowsiMeet";
 import Careers from "@/pages/Careers";
 import JobApplication from "@/pages/JobApplication";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 
 function Router() {
   return (
@@ -46,6 +47,7 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/careers" component={Careers} />
       <Route path="/careers/apply/:jobId" component={JobApplication} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -53,6 +55,8 @@ function Router() {
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);
+  const pathname =
+    typeof window !== "undefined" ? window.location.pathname : "";
 
   useEffect(() => {
     // Show popup after 30 seconds
@@ -78,7 +82,10 @@ function App() {
         <Navbar />
         <Router />
         <Footer />
-        {showPopup && <PopupForm onClose={handleClosePopup} />}
+        {/* Hide popup on careers listing and job application pages */}
+        {showPopup && !pathname.includes("/careers") && (
+          <PopupForm onClose={handleClosePopup} />
+        )}
       </TooltipProvider>
     </QueryClientProvider>
   );
