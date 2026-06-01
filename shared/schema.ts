@@ -113,6 +113,7 @@ export interface IJob extends Document {
   description: string;
   requirements: string[];
   responsibilities: string[];
+  experience?: string; // e.g., "3-5 years", "Fresher", etc.
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -128,6 +129,7 @@ const JobSchema: Schema<IJob> = new Schema(
     description: { type: String, required: true },
     requirements: [{ type: String }],
     responsibilities: [{ type: String }],
+    experience: { type: String },
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }

@@ -21,6 +21,7 @@ interface Job {
   description: string;
   requirements: string[];
   responsibilities: string[];
+  experience?: string;
   isActive: boolean;
 }
 
@@ -65,12 +66,12 @@ const JobApplication = () => {
       const data = await apiRequest("GET", `/api/jobs/${jobId}`);
       // Handle both response formats: { success: true, data: job } or just job
       const jobData = data?.data || data;
-      if (jobData && jobData.isActive) {
+      if (jobData) {
         setJob(jobData);
       } else {
         toast({
           title: "Error",
-          description: "Job not found or no longer available",
+          description: "Job not found",
           variant: "destructive",
         });
         setLocation("/careers");
@@ -114,6 +115,16 @@ const JobApplication = () => {
     e.preventDefault();
 
     if (!job) return;
+
+    // Do not accept new applications if job is inactive
+    if (!job.isActive) {
+      toast({
+        title: "Applications closed",
+        description: "This position is no longer accepting applications.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
       toast({
@@ -238,6 +249,12 @@ const JobApplication = () => {
                     <Clock className="h-4 w-4 mr-2" />
                     <span>{job.type}</span>
                   </div>
+                {job.experience && (
+                  <div className="flex items-center">
+                    <Briefcase className="h-4 w-4 mr-2" />
+                    <span>Experience: {job.experience}</span>
+                  </div>
+                )}
                 </div>
                 <Badge variant="secondary" className="mt-2">
                   Job Code: {job.uniqueCode}
@@ -274,16 +291,17 @@ const JobApplication = () => {
           </div>
         </div>
 
-        {/* Application Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Application Form</CardTitle>
-            <CardDescription>
-              Please fill out the form below to apply for this position
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Application Form or closed message */}
+        {job.isActive ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>Application Form</CardTitle>
+              <CardDescription>
+                Please fill out the form below to apply for this position
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="firstName">First Name *</Label>
@@ -391,12 +409,22 @@ const JobApplication = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full" disabled={isSubmitting} size="lg">
-                {isSubmitting ? "Submitting..." : "Submit Application"}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+                <Button type="submit" className="w-full" disabled={isSubmitting} size="lg">
+                  {isSubmitting ? "Submitting..." : "Submit Application"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card>
+            <CardHeader>
+              <CardTitle>Applications Closed</CardTitle>
+              <CardDescription>
+                This position is no longer accepting applications, but you can still review the job details above.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        )}
       </div>
     </div>
   );

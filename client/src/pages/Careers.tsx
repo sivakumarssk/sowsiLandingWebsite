@@ -17,6 +17,7 @@ interface Job {
   description: string;
   requirements: string[];
   responsibilities: string[];
+  experience?: string;
   isActive: boolean;
 }
 
@@ -33,7 +34,8 @@ const Careers = () => {
     try {
       const data = await apiRequest("GET", "/api/jobs");
       const jobsList = Array.isArray(data) ? data : [];
-      setJobs(jobsList.filter((job: Job) => job.isActive));
+      // Show all jobs (active and inactive)
+      setJobs(jobsList as Job[]);
     } catch (error) {
       toast({
         title: "Error",
@@ -73,7 +75,7 @@ const Careers = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {jobs.map((job) => (
-              <Card key={job._id} className="hover:shadow-lg transition-shadow cursor-pointer">
+              <Card key={job._id} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <CardTitle className="text-xl">{job.title}</CardTitle>
@@ -93,15 +95,23 @@ const Careers = () => {
                       <Clock className="h-4 w-4 mr-2" />
                       <span className="text-sm">{job.type}</span>
                     </div>
+                    {job.experience && (
+                      <div className="flex items-center text-gray-600">
+                        <Briefcase className="h-4 w-4 mr-2" />
+                        <span className="text-sm">Experience: {job.experience}</span>
+                      </div>
+                    )}
                   </div>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                     {job.description}
                   </p>
                   <Button
-                    onClick={() => handleJobClick(job)}
+                    onClick={() => job.isActive && handleJobClick(job)}
                     className="w-full"
+                    disabled={!job.isActive}
+                    variant={job.isActive ? "default" : "outline"}
                   >
-                    Apply Now
+                    {job.isActive ? "Apply Now" : "Applications Closed"}
                   </Button>
                 </CardContent>
               </Card>

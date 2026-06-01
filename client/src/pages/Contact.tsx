@@ -44,7 +44,7 @@ const Contact = () => {
                     <div className="flex items-start">
                       <Phone className="h-5 w-5 text-primary mt-1" />
                       <div className="ml-4">
-                        <p className="text-gray-900"><a href="tel:+919948740733">+91 9948740733</a></p>
+                        <p className="text-gray-900"><a href="tel:+918019929888">+91 8019929888</a></p>
                         <p className="text-gray-500 text-sm">Mon-Fri 9am-6pm</p>
                       </div>
                     </div>
