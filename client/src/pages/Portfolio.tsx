@@ -2,47 +2,138 @@ import { Helmet } from "react-helmet-async";
 import PortfolioItem from "@/components/PortfolioItem";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import PopupForm from "../components/PopupForm";
+import { ArrowRight } from "lucide-react";
+
+import { useState } from "react";
+
+import analyticsImg from "../assets/portfolio/AI-powered-analytics-dashboard.png";
+import travelImg from "../assets/portfolio/AllonsZ-digital-platform.png";
+import ecommerceImg from "../assets/portfolio/E-commerce-Platform.png";
+import farmImg from "../assets/portfolio/smart-delivery-platform.png";
+import iotImg from "../assets/portfolio/IOT-home-automation.png";
+import healthcareImg from "../assets/portfolio/HealthCare-Mangement-system.png";
+import bankingImg from "../assets/portfolio/mobile-banking-solution.png";
+import aiHealthImg from "../assets/portfolio/AI-healthCare-Platform.png";
+import supplyChainImg from "../assets/portfolio/supply-chain-mangement-solution.png";
+import rightImage from "../assets/portfolio/rightImage.png"
+
+const categories = [
+  "All",
+  "App Development",
+  "Web Development",
+  "E-Commerce",
+  "IoT",
+];
+
+
 
 const portfolioItems = [
   {
-    title: "E-commerce Platform",
+    title: "E-COMMERCE PLATFORM",
+    category: "Web Development",
     description: "A scalable e-commerce solution for a fashion retailer with advanced product filtering and personalized recommendations.",
-    imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["React", "Node.js", "MongoDB"]
+    imageSrc: ecommerceImg,
+    technologies: ["React", "Node.js", "MongoDB"],
   },
   {
-    title: "IoT Home Automation",
+    title: "ALLONSZ DIGITAL PLATFORM",
+    category: "App Development",
+    description: "A smart digital platform offering personalized recommendations, secure access, and seamless user experiences.",
+    imageSrc: travelImg,
+    technologies: ["Flutter", "Node.js", "Firebase"],
+  },
+  {
+    title: "SMART FARM DELIVERY PLATFORM",
+    category: "App Development",
+    description: "A farm-to-home delivery platform for fresh dairy products, subscriptions, order tracking, and seamless shopping.",
+    imageSrc: farmImg,
+    technologies: ["Flutter", "Node.js", "Firebase"],
+  },
+  {
+    title: "IOT HOME AUTOMATION",
+    category: "IoT",
     description: "A comprehensive smart home system with mobile app control, energy monitoring, and intelligent automation scenarios.",
-    imageSrc: "https://images.unsplash.com/photo-1601972599720-36938d4ecd31?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["IoT", "React Native", "AWS"]
+    imageSrc: iotImg,
+    technologies: ["IoT", "React Native", "AWS"],
   },
   {
-    title: "AI-Powered Analytics Dashboard",
-    description: "A business intelligence platform with predictive analytics, custom reporting, and interactive data visualizations.",
-    imageSrc: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["Python", "TensorFlow", "Vue.js"]
-  },
-  {
-    title: "Healthcare Management System",
-    description: "A comprehensive platform for healthcare providers to manage patient records, appointments, and billing information.",
-    imageSrc: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["Angular", "Java Spring", "PostgreSQL"]
-  },
-  {
-    title: "Supply Chain Management Solution",
-    description: "An end-to-end logistics and inventory management system with real-time tracking and predictive analytics.",
-    imageSrc: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["React", "Node.js", "MongoDB", "IoT"]
-  },
-  {
-    title: "Mobile Banking Application",
+    title: "MOBILE BANKING SOLUTION",
+    category: "App Development",
     description: "A secure, feature-rich mobile banking application with biometric authentication and personalized financial insights.",
-    imageSrc: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["React Native", "Firebase", "Node.js"]
-  }
+    imageSrc: bankingImg,
+    technologies: ["React Native", "Firebase", "Node.js"],
+  },
+  {
+    title: "HEALTHCARE MANAGEMENT SYSTEM",
+    category: "Web Development",
+    description: "An AI-powered healthcare platform for health tracking, doctor consultations, and personalized care insights.",
+    imageSrc: healthcareImg,
+    technologies: ["Angular", "Java Spring", "PostgreSQL"],
+  },
+  {
+    title: "AI HEALTHCARE PLATFORM",
+    category: "AI",
+    description: "An AI-powered healthcare platform for health tracking, doctor consultations, and personalized care insights.",
+    imageSrc: aiHealthImg,
+    technologies: ["Flutter", "Node.js", "FireBase"],
+  },
+  {
+    title: "AI-POWERED ANALYTICS DASHBOARD",
+    category: "AI",
+    description: "A business intelligence platform with predictive analytics, custom reporting, and interactive data visualizations.",
+    imageSrc: analyticsImg,
+    technologies: ["Python", "TensorFlow", "Vue.js"],
+  },
+  {
+    title: "SUPPLY CHAIN MANAGEMENT",
+    category: "Web Development",
+    description: "An end-to-end logistics and inventory management system with real-time tracking and predictive analytics.",
+    imageSrc: supplyChainImg,
+    technologies: ["React", "Node.js", "MongoDB","IOT"],
+  },
 ];
 
+const categoryProjects = {
+  All: portfolioItems.map((item) => item.title),
+
+  "App Development": [
+    "E-COMMERCE PLATFORM",
+    "ALLONSZ DIGITAL PLATFORM",
+    "SMART FARM DELIVERY PLATFORM",
+    "MOBILE BANKING SOLUTION",
+    "AI HEALTHCARE PLATFORM",
+  ],
+
+  "Web Development": [
+    "E-COMMERCE PLATFORM",
+    "AI ANALYTICS DASHBOARD",
+    "IOT HOME AUTOMATION",
+    "HEALTHCARE MANAGEMENT SYSTEM",
+  ],
+
+  "E-Commerce": [
+    "E-COMMERCE PLATFORM",
+    "SMART FARM DELIVERY PLATFORM",
+  ],
+
+  IoT: [
+    "IOT HOME AUTOMATION",
+    "SUPPLY CHAIN MANAGEMENT",
+  ],
+};
+
 const Portfolio = () => {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [showPopup, setShowPopup] = useState(false);
+  const filteredProjects =
+  activeCategory === "All"
+    ? portfolioItems
+    : portfolioItems.filter((item) =>
+        categoryProjects[
+          activeCategory as keyof typeof categoryProjects
+        ].includes(item.title)
+      );
   return (
     <>
       <Helmet>
@@ -50,23 +141,100 @@ const Portfolio = () => {
         <meta name="description" content="Explore Sowsi Technologies' portfolio of successful web, mobile, IoT, and AI development projects across various industries." />
       </Helmet>
       
-      <section className="py-24 bg-[#F8FAFC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl font-extrabold text-[#1E293B] sm:text-5xl sm:tracking-tight">
-              Our Portfolio
-            </h1>
-            <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
-              Explore our collection of successful projects that showcase our expertise and innovation.
-            </p>
-          </div>
+<section className="bg-[#F8FAFC] min-h-[500px] flex items-center">
+<div className="max-w-[1800px] px-4">
+
+<div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center">
+
+      {/* Left Content */}
+    <div className="max-w-[800px] ml-6">
+
+        <div className="inline-flex items-center bg-blue-100 px-4 py-4 rounded-full">
+          <span className="font-semibold text-lg">
+            • OUR PORTFOLIO
+          </span>
         </div>
-      </section>
+<h1 className="mt-8 text-5xl lg:text-[52px] font-bold leading-[1.1] text-[#0F172A]">
+          Creating Digital
+          <br />
+          Experiences That
+          <br />
+          <span className="text-blue-500">
+            Drive Real Impact
+          </span>
+        </h1>
+
+<p className="mt-8 text-[22px] leading-[1.5] text-gray-500 max-w-[600px]">
+          Explore our collection of innovative solutions,
+          successful projects that showcase our expertise
+          and innovation.
+        </p>
+<div
+  onClick={() => setShowPopup(true)}
+  className="mt-10 flex items-center cursor-pointer group"
+>
+  <div
+    className="
+      relative flex items-center
+      bg-gradient-to-r from-[#5DAAF8] to-[#3458B5]
+      rounded-full h-16 px-12 pr-20
+      transition-all duration-300
+      group-hover:bg-white
+      group-hover:bg-none
+      group-hover:border
+      group-hover:border-[#3458B5]
+    "
+  >
+    <span
+      className="
+        text-white text-xl font-semibold
+        transition-colors duration-300
+        group-hover:text-[#3458B5]
+      "
+    >
+      Have a Project in Mind?
+    </span>
+
+    <div className="absolute right-1 w-14 h-14 rounded-full bg-[#27408F] flex items-center justify-center">
+      <ArrowRight className="w-6 h-6 text-white" />
+    </div>
+  </div>
+</div>
+      </div>
+
+      {/* Right Image */}
+ <div className="flex justify-end mr-[-10px]">
+ <img
+  src={rightImage}
+  alt="Portfolio Hero"
+  className="w-full max-w-[500px] h-[460px] rounded-[24px] object-cover translate-y-6"
+/>
+</div>
+
+    </div>
+
+  </div>
+</section>
       
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {portfolioItems.map((item, index) => (
+      <section className="pt-20 pb-24 bg-white">
+<div className="max-w-[1600px] mx-auto px-6">
+<div className="flex flex-wrap justify-start gap-3 mb-16">
+  {categories.map((category) => (
+    <button
+      key={category}
+      onClick={() => setActiveCategory(category)}
+      className={`px-8 py-2 rounded-full transition-all duration-300 text-sm ${
+  activeCategory === category
+    ? "border border-[#1E2A78] bg-[#DDE4FF] text-[#1E2A78] font-semibold"
+    : "border border-gray-400 text-gray-600 font-medium"
+}`}
+    >
+      {category}
+    </button>
+  ))}
+</div>
+<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">          
+   {filteredProjects.map((item, index) => (
               <PortfolioItem key={index} {...item} />
             ))}
           </div>
@@ -93,9 +261,21 @@ const Portfolio = () => {
                   </p>
                   <div className="mt-4">
                     <Link href="/products/invoice-inventory-suite">
-                      <Button size="sm" variant="outline" className="border-primary/40 text-primary hover:bg-white/10">
-                        Join Early Access
-                      </Button>
+                      <Button
+  size="sm"
+  variant="outline"
+  className="
+    border-primary/40
+    text-primary
+    hover:bg-white/10
+    hover:text-white
+    hover:border-white
+    transition-all
+    duration-300
+  "
+>
+  Join Early Access
+</Button>
                     </Link>
                   </div>
                 </div>
@@ -109,9 +289,22 @@ const Portfolio = () => {
                   </p>
                   <div className="mt-4">
                     <Link href="/products/sowsi-meet">
-                      <Button size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                        Preview Features
-                      </Button>
+                       <Button
+  size="sm"
+  variant="outline"
+  className="
+    border-primary/40
+    text-primary
+    hover:bg-white/10
+    hover:text-white
+    hover:border-white
+    transition-all
+    duration-300
+  "
+>
+  Preview Features
+</Button>
+                
                     </Link>
                   </div>
                 </div>
@@ -134,6 +327,9 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
+      {showPopup && (
+  <PopupForm onClose={() => setShowPopup(false)} />
+)}
     </>
   );
 };

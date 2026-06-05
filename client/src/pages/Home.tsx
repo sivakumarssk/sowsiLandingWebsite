@@ -8,6 +8,14 @@ import PortfolioItem from "@/components/PortfolioItem";
 import StatsCounter from "@/components/StatsCounter";
 import { CheckCircle2, Clock, Gauge, Lightbulb, ShieldCheck, Sparkles } from "lucide-react";
 
+import analyticsImg from "../assets/portfolio/AI-powered-analytics-dashboard.png";
+import travelImg from "../assets/portfolio/AllonsZ-digital-platform.png";
+import ecommerceImg from "../assets/portfolio/E-commerce-Platform.png";
+import farmImg from "../assets/portfolio/smart-delivery-platform.png";
+import iotImg from "../assets/portfolio/IOT-home-automation.png";
+import healthcareImg from "../assets/portfolio/HealthCare-Mangement-system.png";
+import bankingImg from "../assets/portfolio/mobile-banking-solution.png";
+
 const services = [
   {
     title: "Web Development",
@@ -46,23 +54,52 @@ const services = [
 
 const portfolioItems = [
   {
-    title: "E-commerce Platform",
-    description: "A scalable e-commerce solution for a fashion retailer with advanced product filtering and personalized recommendations.",
-    imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["React", "Node.js", "MongoDB"]
+    title: "E-COMMERCE PLATFORM",
+      category: "Web Development",
+    description: "A scalable e-commerce solution for a fashion retailer.",
+    imageSrc: ecommerceImg,
+    technologies: ["React", "Node.js", "MongoDB"],
   },
+
   {
-    title: "IoT Home Automation",
-    description: "A comprehensive smart home system with mobile app control, energy monitoring, and intelligent automation scenarios.",
-    imageSrc: "https://images.unsplash.com/photo-1601972599720-36938d4ecd31?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["IoT", "React Native", "AWS"]
+    title: "ALLONSZ DIGITAL PLATFORM",
+    category: "App Development",
+    description: "Travel booking and planning platform.",
+    imageSrc: travelImg,
+    technologies: ["Flutter", "Node.js", "Firebase"],
   },
+
   {
-    title: "AI-Powered Analytics Dashboard",
-    description: "A business intelligence platform with predictive analytics, custom reporting, and interactive data visualizations.",
-    imageSrc: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&q=80&w=600&h=700",
-    technologies: ["Python", "TensorFlow", "Vue.js"]
-  }
+    title: "SMART FARM DELIVERY PLATFORM",
+    category: "App Development",
+    description: "Farm-to-home delivery platform.",
+    imageSrc: farmImg,
+    technologies: ["Flutter", "Node.js", "Firebase"],
+  },
+
+  {
+    title: "IOT HOME AUTOMATION",
+    category: "IOT",
+    description: "Smart home automation platform.",
+    imageSrc: iotImg,
+    technologies: ["IoT", "Node.js", "AWS"],
+  },
+
+  {
+    title: "HEALTHCARE MANAGEMENT SYSTEM",
+    category: "Web Development",
+    description: "Healthcare management platform.",
+    imageSrc: healthcareImg,
+    technologies: ["React", "Spring Boot", "PostgreSQL"],
+  },
+
+  {
+    title: "MOBILE BANKING SOLUTION",
+    category: "App Development",
+    description: "Secure mobile banking solution.",
+    imageSrc: bankingImg,
+    technologies: ["React Native", "Firebase", "Node.js"],
+  },
 ];
 
 const keyHighlights = [

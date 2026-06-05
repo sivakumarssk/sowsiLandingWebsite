@@ -26,6 +26,7 @@ import SowsiMeet from "@/pages/products/SowsiMeet";
 import Careers from "@/pages/Careers";
 import JobApplication from "@/pages/JobApplication";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import FloatingContactButtons from "./components/FloatingContactButtons";
 
 function Router() {
   return (
@@ -82,6 +83,12 @@ function App() {
         <Navbar />
         <Router />
         <Footer />
+
+        <>
+  {/* Routes / Pages */}
+
+  <FloatingContactButtons />
+</>
         {/* Hide popup on careers listing and job application pages */}
         {showPopup && !pathname.includes("/careers") && (
           <PopupForm onClose={handleClosePopup} />
