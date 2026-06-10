@@ -22,8 +22,9 @@ const categories = [
   "All",
   "App Development",
   "Web Development",
+   "IoT",
   "E-Commerce",
-  "IoT",
+ 
 ];
 
 

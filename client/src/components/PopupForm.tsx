@@ -59,7 +59,9 @@ const PopupForm = ({ onClose }: PopupFormProps) => {
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md popup-content">
+      <DialogContent
+  className="sm:max-w-md popup-content max-h-[90vh] overflow-y-auto mt-8"
+>
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">Get a Free Consultation</DialogTitle>
           <DialogDescription className="text-center">

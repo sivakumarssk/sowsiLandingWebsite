@@ -18,7 +18,7 @@ const PortfolioItem = ({
     bg-[#F8F8F8]
     rounded-[20px]
     p-3
-    h-[420px]
+    h-[450px]
     max-w-[500px]
     mx-auto
 shadow-[0_0_30px_8px_rgba(0,0,0,0.15)]
