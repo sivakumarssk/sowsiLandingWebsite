@@ -2,7 +2,7 @@ import { Phone} from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const FloatingContactButtons = () => {
-  const phoneNumber = "9948740733";
+  const phoneNumber = "8019929888";
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
